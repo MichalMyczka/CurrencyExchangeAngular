@@ -25,6 +25,66 @@ export class CurrencySelectorComponent implements OnInit {
 
     function myFunction(){
       switch((<HTMLInputElement>event.target).value){
+        case 'HKD':
+          document.body.style.backgroundImage = "url('../assets/Hong-Kong-dollar.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'PHP':
+          document.body.style.backgroundImage = "url('../assets/Philippines-peso.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'DKK':
+          document.body.style.backgroundImage = "url('../assets/Danish-krone.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'HUF':
+          document.body.style.backgroundImage = "url('../assets/Hungarian-forint.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'CZK':
+          document.body.style.backgroundImage = "url('../assets/Czech-koruna.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'AUD':
+          document.body.style.backgroundImage = "url('../assets/Australian-dollar.png')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'RON':
+          document.body.style.backgroundImage = "url('../assets/Romanian-leu.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'SEK':
+          document.body.style.backgroundImage = "url('../assets/Swedish-krona.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'IDR':
+          document.body.style.backgroundImage = "url('../assets/indonesian-rupiah.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'INR':
+          document.body.style.backgroundImage = "url('../assets/India-rupees.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'BRL':
+          document.body.style.backgroundImage = "url('../assets/real-currency-spotlight.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'RUB':
+          document.body.style.backgroundImage = "url('../assets/Russian-rouble.png')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'HRK':
+          document.body.style.backgroundImage = "url('../assets/Croatian-kuna.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'JPY':
+          document.body.style.backgroundImage = "url('../assets/Japanese-yen.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
+        case 'THB':
+          document.body.style.backgroundImage = "url('../assets/Thai-baht.jpeg')";
+          document.body.style.backgroundSize = "cover";
+          break;
         case 'GBP':
           document.body.style.backgroundImage = "url('../assets/pound-sterling.png')";
           document.body.style.backgroundSize = "cover";
