@@ -51,7 +51,7 @@ input {
   max-width: 960px;
   font-weight: 300;
   text-align: center;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.26);
   color: rgb(0, 0, 0);
   /* border: none; */
   border: 5px solid rgba(0, 0, 0, 0.26);

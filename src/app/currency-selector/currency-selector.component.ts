@@ -122,7 +122,7 @@ export class CurrencySelectorComponent implements OnInit {
           document.body.style.backgroundSize = "cover";
           break;
         case 'NOK':
-          document.body.style.backgroundImage = "url('../assets/norwegian-krone-1.png')";
+          document.body.style.backgroundImage = "url('../assets/norwegian-krone.png')";
           document.body.style.backgroundSize = "cover";
           break;
         case 'NZD':

@@ -7,15 +7,15 @@ span {
   border: 2px solid rgb(255, 255, 255);
   font-weight: 700;
   font-size: 14px;
-  background-color: transparent;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(255, 255, 255, 0.87);
+  background-color: black;
   cursor: pointer;
   padding: 6px 12px;
 }
 
 span:hover {
-  background-color: rgba(255, 255, 255, 0.14);
-  color: rgba(255, 255, 255, 0.56);
+  background-color: rgba(255, 255, 255, 0.50);
+  color: rgba(0, 0, 0, 0.50);
 }
 
 label:first-child span {
