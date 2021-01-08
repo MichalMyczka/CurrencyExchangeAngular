@@ -150,27 +150,27 @@ export class CurrencyListService {
     "MXN": {
       currency: 'Mexican peso',
       weight: 10,
-      display: false
+      display: true
     },
-    "ILS": {
+    ILS: {
       currency: 'Israeli shekel',
       weight: 10,
       display: false
     },
-    "GBP": {
+    GBP: {
       currency: 'Pound sterling',
       weight: 10,
       display: true
     },
-    "KRW": {
+    KRW: {
       currency: 'South Korean won',
       weight: 10,
       display: false
     },
-    "MYR": {
+    MYR: {
       currency: 'Malaysian ringgit',
       weight: 10,
-      display: false
+      display: true
     }
   };
 

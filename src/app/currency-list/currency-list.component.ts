@@ -18,6 +18,7 @@ export class CurrencyListComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     const rates = changes.rates;
     const keys = Object.keys(this.currencies);
+    //TODO separate condition from if to boolean function
     if (
       rates && rates.currentValue && (!rates.previousValue ||
       (rates.previousValue && rates.previousValue.baseCurrencyCode !== rates.currentValue.baseCurrencyCode))

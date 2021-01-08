@@ -3,82 +3,79 @@ import {HttpClient, HttpResponse, HttpErrorResponse} from '@angular/common/http'
 import {ConversionRate} from './model/conversion-rate.model';
 import {Observable, Subject, of, throwError} from 'rxjs';
 import {map, tap, catchError} from 'rxjs/operators';
-import { ExchangeRateItem } from './model/exchange-rate-item.model';
+import {ExchangeRateItem} from './model/exchange-rate-item.model';
 
 @Injectable({providedIn: 'root'})
 export class ConversionRatesService {
 
-  private baseUrl = 'https://api.exchangeratesapi.io/latest';
-  private _loading: boolean;
-  private loadingStatus: Subject<boolean> = new Subject<boolean>();
+    private baseUrl = 'https://api.exchangeratesapi.io/latest';
+    private _loading: boolean;
+    private loadingStatus: Subject<boolean> = new Subject<boolean>();
 
-  private cache = {};
+    private cache = {};
 
-  constructor(private http: HttpClient) {}
-
-  getLatestExchangeRates(
-    amount: number,
-    baseCurrencyCode: string,
-    otherCurrencyCodes: string[]
-  ): Observable <ConversionRate> {
-    const url = `${this.baseUrl}?base=${baseCurrencyCode}&symbols=${otherCurrencyCodes.join(',')}`;
-
-    let conversionRateObj: ConversionRate;
-
-    this.startLoading();
-
-    if (this.cache && this.cache[baseCurrencyCode]) {
-
-      if (amount !== this.cache[baseCurrencyCode].amount) {
-        conversionRateObj = new ConversionRate(
-          amount,
-          baseCurrencyCode,
-          this.cache[baseCurrencyCode].date,
-          this.cache[baseCurrencyCode].rates
-        );
-        return of(conversionRateObj);
-      }
-
-      return of(this.cache[baseCurrencyCode]);
-    } else {
-
-      return this.http.get(url, {observe: 'response'}).pipe(
-        map((response: HttpResponse<ExchangeRateItem>) => {
-          if (response.ok && response.status === 200) {
-            return new ConversionRate(
-              amount,
-              baseCurrencyCode,
-              new Date(response.body.date),
-              response.body.rates
-            );
-          }
-        }),
-        tap(lastConversionRate => this.cache[baseCurrencyCode] = lastConversionRate),
-        catchError((error: HttpErrorResponse, originalObs: Observable<ConversionRate>) => {
-          return throwError(new Error('oops! We couldn\'t get the latest rates. Please try later.'));
-        })
-      );
+    constructor(private http: HttpClient) {
     }
-  }
 
-  get loading(): boolean {
-    return this._loading;
-  }
+    getLatestExchangeRates(
+        amount: number,
+        baseCurrencyCode: string,
+        otherCurrencyCodes: string[]
+    ): Observable<ConversionRate> {
+        const url = `${this.baseUrl}?base=${baseCurrencyCode}&symbols=${otherCurrencyCodes.join(',')}`;
+        this.startLoading();
 
-  set loading(value) {
-    this._loading = value;
-    this.loadingStatus.next(value);
-  }
+        if (this.cache && this.cache[baseCurrencyCode]) {
+            return of(this.createConversionRateFromCache(amount, baseCurrencyCode));
+        }
+        return this.http.get(url, {observe: 'response'}).pipe(
+            map((response: HttpResponse<ExchangeRateItem>) => {
+                if (response.ok && response.status === 200) {
+                    return new ConversionRate(
+                        amount,
+                        baseCurrencyCode,
+                        new Date(response.body.date),
+                        response.body.rates
+                    );
+                }
+            }),
+            tap(lastConversionRate => this.cache[baseCurrencyCode] = lastConversionRate),
+            catchError((error: HttpErrorResponse, originalObs: Observable<ConversionRate>) => {
+                return throwError(new Error('oops! We couldn\'t get the latest rates. Please try later.'));
+            })
+        );
+    }
 
-  startLoading() {
-    this.loading = true;
-  }
+    get loading(): boolean {
+        return this._loading;
+    }
 
-  stopLoading() {
-    this.loading = false;
-  }
+    set loading(value) {
+        this._loading = value;
+        this.loadingStatus.next(value);
+    }
 
-  getLoadingStatus() {
-    return this.loadingStatus.asObservable();
-  }
+    startLoading(): void {
+        this.loading = true;
+    }
+
+    stopLoading(): void {
+        this.loading = false;
+    }
+
+    getLoadingStatus(): Observable<boolean> {
+        return this.loadingStatus.asObservable();
+    }
+
+    createConversionRateFromCache(amount: number, baseCurrencyCode: string): ConversionRate {
+        if (amount !== this.cache[baseCurrencyCode].amount) {
+            return new ConversionRate(
+                amount,
+                baseCurrencyCode,
+                this.cache[baseCurrencyCode].date,
+                this.cache[baseCurrencyCode].rates
+            );
+        }
+        return this.cache[baseCurrencyCode];
+    }
 }

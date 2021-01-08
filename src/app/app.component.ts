@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private currencyListService: CurrencyListService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.currencies = this.currencyListService.getCurrencies();
     this.baseCurrencies = this.currencyListService.generateBaseCurrencies(Object.keys(this.currencies));
 
